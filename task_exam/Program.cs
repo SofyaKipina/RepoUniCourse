@@ -30,14 +30,20 @@ namespace task_exam
 
         static int DetermineSequanceTerm(int n)
         {
-            
-                if (n == 0)
-                    return 1;
-                else if (n % 2 != 0)
-                    return 2 * DetermineSequanceTerm(n - 2);
-                else return DetermineSequanceTerm(n - 1) - 3 * DetermineSequanceTerm(n - 2);
-            
+            int maxRecursiveCalls = 9;
+            if (n == 0)
+                return 1;
+            else if (n % 2 != 0)
+            {
+                maxRecursiveCalls--;
+                return 2 * (n + 1) / 2;
+            }
+            else
+            {
+                maxRecursiveCalls--;
+                return DetermineSequanceTerm(n - 2) - 3 * DetermineSequanceTerm(n - 1); //здесь нужно использовать / а не -, но в таком случае выходит ошибка
+            }
+        }
         }
 
-    }
 }
