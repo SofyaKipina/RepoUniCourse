@@ -13,7 +13,7 @@ namespace Library
         public readonly int LibraryCardId;
 
         public string BorrowedLiterature;
-        public readonly DateTime IssueDate;
+        public DateTime IssueDate;
         public double TermDate;
         public DateTime ReturnDate => IssueDate.AddDays(TermDate);
         public int Deposit;
@@ -28,10 +28,10 @@ namespace Library
         public virtual string[] GetInfo()
         {
             var info = new string[2];
-            info[0] = $"{Name} {Surname}";
-            info[1] = $"Номер читательского билета: {LibraryCardId}, Список взятой литературы: {BorrowedLiterature}, " +
-                $"Дата выдачи: {IssueDate}, Срок выдачи: {TermDate}, " +
-                $"Дата планируемого возвращения: {ReturnDate}, Сумма залога: {Deposit}";
+            info[0] = $"{Name} {Surname} Номер читательского билета: {LibraryCardId}";
+            info[1] = $"Список взятой литературы: {BorrowedLiterature}, " +
+                $"Дата выдачи: {IssueDate.ToString("dd.MM.yyyy")}, Срок выдачи: {TermDate}, " +
+                $"Дата планируемого возвращения: {ReturnDate.ToString("dd.MM.yyyy")}, Сумма залога: {Deposit}";
             return info;
         }
 
