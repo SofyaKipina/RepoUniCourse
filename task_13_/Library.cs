@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library 
+namespace Library
 {
     public class Person
     {
@@ -35,5 +35,74 @@ namespace Library
             return info;
         }
 
+    }
+
+    public class RegularReader : Person
+    {
+        public DateTime RegistrationDate { get; set; }
+        public string Address { get; set; }
+        public string PhoneNumber { get; set; }
+
+        public RegularReader(string name, string surename, int libraryCardId) : base(name, surename, libraryCardId)
+        {
+        }
+
+        public override string[] GetInfo()
+        {
+            var info = new string[2];
+            var personInfo = base.GetInfo();
+
+            info[0] = personInfo[0];
+            info[1] = $"Постоянный читатель. Дата записи в библиотеку: {RegistrationDate.ToString("d")}. Адрес: {Address}. Номер телефона: {PhoneNumber}.";
+
+            return info;
+        }
+
+
+    }
+
+    public class TemporaryReader : Person
+    {
+        public DateTime EndDate { get; set; }
+        public string Departaments { get; set; }
+
+        public TemporaryReader(string name, string surename, int libraryCardId) : base(name, surename, libraryCardId)
+        {
+        }
+
+        public override string[] GetInfo()
+        {
+            var info = new string[2];
+            var personInfo = base.GetInfo();
+
+            info[0] = personInfo[0];
+            info[1] = $"Временный читатель. Дата окончания допуска в библиотеку: {EndDate.ToString("d")}. Отделы: {Departaments}.";
+
+            return info;
+        }
+
+    }
+
+    public class Visitor : Person
+    {
+        public DateTime ComingInTime { get; set; }
+        public DateTime LeavingTime { get; set; }
+        public string Document { get; set; }
+        public int DocumentNumber { get; set; }
+
+        public Visitor(string name, string surename, int libraryCardId) : base(name, surename, libraryCardId)
+        {
+        }
+
+         public override string[] GetInfo()
+        {
+            var info = new string[2];
+            var personInfo = base.GetInfo();
+
+            info[0] = personInfo[0];
+            info[1] = $"Посетитель. Время прихода: {ComingInTime:t}. Время ухода: {LeavingTime:t}. Название удостоверения личности: {Document}. Номер удостоверения: {DocumentNumber}.";
+
+            return info;
+        }
     }
 }
