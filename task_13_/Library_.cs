@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    public class Person
+    public class Person : IComparable<Person>, IComparer<Person>
     {
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -35,6 +36,39 @@ namespace Library
             return info;
         }
 
+        public int CompareTo(Person other)
+        {
+            if (Surname != other.Surname)
+                return Surname.CompareTo(other.Surname);
+            else return Name.CompareTo(other.Name);
+        }
+
+        public int Compare(Person x, Person y)
+        {
+            return x.LibraryCardId.CompareTo(y.LibraryCardId);
+        }
+    }
+
+    public class Library : IEnumerable<Person>
+    { 
+        public string Title { get; set; }
+
+        public string Address;
+        List<Person> readers;
+        public int Count { get => readers.Count; }
+        public Library(string title, string address, IEnumerable<Person> persons)
+        {
+            Title = title;
+            Address = address;
+            readers = new List<Person>();
+            foreach (var person in persons)
+                if (!readers.Contains(person))
+                    readers.Add(person); 
+        }
+
+        public IEnumerator<Person> GetEnumerator() => readers.GetEnumerator();
+       
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
     public class RegularReader : Person

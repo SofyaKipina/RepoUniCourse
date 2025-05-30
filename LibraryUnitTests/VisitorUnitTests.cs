@@ -9,7 +9,7 @@ using Library;
 namespace LibraryUnitTests
 {
     [TestFixture]
-    internal class VisitorUnitTests
+    public class VisitorUnitTests
     {
         [Test]
         public void ConstructorTest()
